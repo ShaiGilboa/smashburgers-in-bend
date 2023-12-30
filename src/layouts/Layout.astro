@@ -9,14 +9,17 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta
+      name="description"
+      content="Your options for smashburgers in Bend, Oregon"
+    />
     <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>"
     />
-    <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
 
@@ -26,7 +29,22 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+
+    <ViewTransitions />
+  </head>
+
+  <body>
+    <div class="site-wrap">
+      <slot />
+      <Footer />
+    </div>
+
     <style is:global>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+      }
       html {
         font-family: system-ui, sans-serif;
 
@@ -43,17 +61,20 @@ const { title } = Astro.props;
         --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
         --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
         --font-size-xxxl: clamp(3rem, 3.5vw + 2rem, 5rem);
+        line-height: 1.5;
 
         hanging-punctuation: first last;
       }
-
       body {
         margin: 0;
+      }
+      .site-wrap {
         height: 100dvh;
         display: grid;
         grid-template-rows: 1fr auto;
       }
-      main img {
+
+      img {
         display: block;
         max-width: 100%;
         height: auto;
@@ -82,12 +103,5 @@ const { title } = Astro.props;
         text-wrap: pretty;
       }
     </style>
-    <ViewTransitions />
-  </head>
-
-  <body>
-    <slot />
-
-    <Footer />
   </body>
 </html>
